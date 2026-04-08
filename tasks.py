@@ -13,7 +13,7 @@ def easy_task_grader(state: State) -> float:
         score = 0.4
     else:
         score = 0.1
-    return float(max(0.0, min(1.0, score)))
+    return float(max(0.01, min(0.99, score)))
 
 def medium_task_grader(state: State) -> float:
     """
@@ -29,14 +29,14 @@ def medium_task_grader(state: State) -> float:
     elif state.legal_stage == "notices-sent":
         score += 0.2
         
-    return float(max(0.0, min(1.0, score)))
+    return float(max(0.01, min(0.99, score)))
 
 def hard_task_grader(state: State) -> float:
     """
     Goal: Full resolution within 8 steps with low stress.
     """
     if state.resolution_status != "resolved":
-        return 0.2 * (1.0 - state.user_stress)
+        return float(max(0.01, min(0.99, 0.2 * (1.0 - state.user_stress))))
     
     score = 0.6 # Base score for resolution
     
@@ -49,4 +49,4 @@ def hard_task_grader(state: State) -> float:
     # Stress penalty reduction
     score += (1.0 - state.user_stress) * 0.1
     
-    return float(max(0.0, min(1.0, score)))
+    return float(max(0.01, min(0.99, score)))
