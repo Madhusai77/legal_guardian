@@ -1,0 +1,11 @@
+flask
+flask-cors
+pydantic
+openai
+pymongo
+python-dotenv
+gunicorn
+openenv-core
+fastapi
+uvicorn
+requests

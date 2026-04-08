@@ -1,0 +1,38 @@
+name: debt-harassment-legal-ai
+version: "1.1.0"
+description: "AI training environment for legal harassment resolution in debt collections."
+entry_point: environment.debt_env:DebtEnv
+
+observation_space:
+  type: object
+  properties:
+    state: 
+      type: object
+    message:
+      type: string
+    available_actions:
+      type: array
+
+action_space:
+  type: object
+  properties:
+    action_type:
+      type: string
+    content:
+      type: string
+
+reward_range: [0.0, 1.0]
+
+tasks:
+  - id: easy_task
+    name: "Harassment Mitigation"
+    difficulty: easy
+    grader: tasks:easy_task_grader
+  - id: medium_task
+    name: "Legal Escalation Control"
+    difficulty: medium
+    grader: tasks:medium_task_grader
+  - id: hard_task
+    name: "Debt Settlement"
+    difficulty: hard
+    grader: tasks:hard_task_grader
