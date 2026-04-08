@@ -164,6 +164,9 @@ def logs(session_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == "__main__":
+def main():
     port = int(os.getenv("PORT", 7860))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port)
+
+if __name__ == "__main__":
+    main()

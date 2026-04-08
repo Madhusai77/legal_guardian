@@ -26,4 +26,7 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = ["agents", "db", "environment", "models", "utils"]
+packages = ["agents", "db", "environment", "models", "utils", "server"]
+
+[project.scripts]
+server = "server.app:main"
