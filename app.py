@@ -18,8 +18,8 @@ def health():
 
 @app.route("/reset", methods=["POST"])
 def reset():
-    data = request.json or {}
-    scenario = data.get("scenario", "easy")
+    data = request.get_json(silent=True) or {}
+    scenario = data.get("scenario") or request.args.get("scenario", "easy")
     try:
         obs = env.reset(scenario)
         return jsonify(obs.dict())
@@ -96,12 +96,14 @@ def analyze():
 
 @app.route("/step", methods=["POST"])
 def step():
-    data = request.json
-    if not data:
-        return jsonify({"error": "Missing action data"}), 400
+    data = request.get_json(silent=True) or {}
+    
+    action_str = data.get("action") or request.args.get("action")
+    action_type = data.get("action_type") or "negotiation"
+    content = data.get("content") or action_str or "continue"
         
     try:
-        action = Action(**data)
+        action = Action(action_type=action_type, content=content)
         result = env.step(action)
         return jsonify(result.dict())
     except Exception as e:
