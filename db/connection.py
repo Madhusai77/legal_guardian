@@ -4,6 +4,10 @@ import sys
 
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 
+db = None
+sessions_collection = None
+logs_collection = None
+
 try:
     client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
     # Trigger connection to check if URI is valid
@@ -14,5 +18,4 @@ try:
 except Exception as e:
     print(f"CRITICAL: Failed to connect to MongoDB at {MONGO_URI}: {e}")
     # In some environments (like HF Spaces), we might want to fall back to a mock or just log
-    # For now, we allow it to proceed but repos should handle missing 'db'
-    db = None
+    # The collections remain None, which the repositories gracefully handle.
