@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "debt-harassment-legal-ai"
+version = "1.1.0"
+description = "AI training environment for legal harassment resolution in debt collections."
+readme = "README.md"
+authors = [
+    { name = "Hackathon Participant" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "flask",
+    "flask-cors",
+    "pydantic",
+    "openai",
+    "pymongo",
+    "python-dotenv",
+    "gunicorn",
+    "openenv-core",
+    "fastapi",
+    "uvicorn",
+    "requests"
+]
+
+[tool.setuptools]
+packages = ["agents", "db", "environment", "models", "utils"]
